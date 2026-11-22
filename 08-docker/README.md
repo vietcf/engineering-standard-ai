@@ -18,7 +18,7 @@ project/
 ├── data/                 # runtime system data
 │   ├── <database>/       # e.g. data/postgres, data/redis
 │   └── uploads/          # user-uploaded files
-├── backup/               # backups (DB dumps, uploads archives)
+├── backups/              # backups (DB dumps, uploads archives)
 ├── certs/                # TLS certificates / keys
 └── dist/                 # exported images (see tools/)
 ```
@@ -79,19 +79,19 @@ services:
 - Volumes, networks and data are **not** shared across environments.
 - Production **MUST NOT** bind mount source code.
 
-## Data, backup, certs — MUST
+## Data, backups, certs — MUST
 | Folder | Content | Mount |
 |---|---|---|
 | `./data/<database>` | Database files (`data/postgres`, `data/mysql`, `data/redis`...) | read-write, DB service only |
 | `./data/uploads` | User-uploaded files | read-write, app only |
-| `./backup` | Backups of `data/` (DB dumps, uploads archives) | backup job only |
+| `./backups` | Backups of `data/` (DB dumps, uploads archives) | backup job only |
 | `./certs` | TLS certificates / keys | `:ro` |
 
 - All persistent data **MUST** live under `./data`; containers **MUST NOT** store data elsewhere.
-- `data/`, `backup/`, `certs/` **MUST** be in `.gitignore` and `.dockerignore`; keep the folders with `.gitkeep`.
+- `data/`, `backups/`, `certs/` **MUST** be in `.gitignore` and `.dockerignore`; keep the folders with `.gitkeep`.
 - Private keys in `certs/` **MUST NOT** be committed or baked into images.
-- Backups **SHOULD** be timestamped (`backup/postgres_YYYYMMDD-HHMMSS.sql.gz`) and **SHOULD** be copied off the host.
-- **MUST NOT** delete or overwrite `data/` or `backup/` without human approval.
+- Backups **SHOULD** be timestamped (`backups/postgres_YYYYMMDD-HHMMSS.sql.gz`) and **SHOULD** be copied off the host.
+- **MUST NOT** delete or overwrite `data/` or `backups/` without human approval.
 
 ## Image export / import (offline deploy)
 Projects **SHOULD** include [tools/](../tools/) scripts (`.sh` for Linux/macOS, `.bat` for Windows):

@@ -34,5 +34,5 @@ You are a coding agent working in a project that follows this Engineering Standa
 ## MUST NOT (without human approval)
 - Push to `main`, force push, merge PRs, delete branches.
 - Deploy, or run migrations on staging / prod.
-- Delete data or files outside the task scope; touch `data/`, `backup/` or `certs/`.
+- Delete data or files outside the task scope; touch `data/`, `backups/` or `certs/`.
 - Commit `.env`, secrets, certs or build output.
