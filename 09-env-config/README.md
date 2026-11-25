@@ -29,6 +29,21 @@ DB_PASSWORD=changeme
 JWT_SECRET=changeme
 ```
 
+## Config changes are manual — MUST
+Database migration is automatic ([10-database](../10-database/)); `.env` and Compose changes on a deployed system are **not**. A human applies them by hand.
+
+- The app, scripts and agents **MUST NOT** create, edit or overwrite `.env` / `.env.<env>` or Compose files on a deployed system.
+- Agents change only the repo copies: `.env.sample` and `compose*.yaml`.
+- New variables **SHOULD** have a safe default, so an upgrade works without editing `.env`.
+- Each release that changes env or Compose **MUST** list the steps in `CHANGELOG.md` under `Manual steps`:
+
+```md
+### Manual steps
+- .env: add `REDIS_URL` (required), rename `DB_PASS` → `DB_PASSWORD`, remove `OLD_FLAG`
+- compose.prod.yaml: add service `redis`
+```
+- No changes → write `Manual steps: none`.
+
 ## Secrets
 - Secrets **MUST NOT** be committed to Git, including history; if leaked → **rotate immediately**.
 - Production **SHOULD** get secrets from a secret manager (Vault, AWS/GCP Secret Manager...) or Docker secrets.

@@ -14,6 +14,7 @@ You are a coding agent working in a project that follows this Engineering Standa
 | README, ADR | [07-docs](07-docs/) |
 | Dockerfile, Compose | [08-docker](08-docker/) |
 | Env, config | [09-env-config](09-env-config/) |
+| Schema, migration | [10-database](10-database/) |
 
 ## Before coding — MUST
 - Read surrounding code; the **project's existing conventions** win over this standard.
@@ -29,10 +30,12 @@ You are a coding agent working in a project that follows this Engineering Standa
 ## Before reporting done — MUST
 - Run the project's lint, format, test and build; all pass.
 - Update docs / `.env.sample` when affected.
+- List every `.env` / Compose change as `Manual steps` in `CHANGELOG.md` and in the report.
 - Report honestly: what was done, what was tested, **what is not verified**.
 
 ## MUST NOT (without human approval)
 - Push to `main`, force push, merge PRs, delete branches.
-- Deploy, or run migrations on staging / prod.
+- Deploy, or run migrations by hand on staging / prod (the system migrates itself at startup).
+- Edit `.env` or Compose files on a deployed system.
 - Delete data or files outside the task scope; touch `data/`, `backups/` or `certs/`.
 - Commit `.env`, secrets, certs or build output.

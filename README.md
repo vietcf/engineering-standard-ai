@@ -14,7 +14,8 @@ Keywords: **MUST** = required · **SHOULD** = recommended, deviate only with a r
 | [06-ci-cd](06-ci-cd/) | Build & deploy |
 | [07-docs](07-docs/) | Documentation |
 | [08-docker](08-docker/) | Docker & Compose |
-| [09-env-config](09-env-config/) | Env & secrets |
+| [09-env-config](09-env-config/) | Env, secrets, manual config changes |
+| [10-database](10-database/) | Automatic database migration |
 | [templates](templates/) | Shared templates |
 | [tools](tools/) | Docker image export / import scripts |
 
